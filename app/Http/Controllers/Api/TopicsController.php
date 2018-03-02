@@ -31,19 +31,19 @@ class TopicsController extends ApiGuardController
 
     public function store(Request $request)
     {
-        $key= DB::table('api_keys')->where('key', $request->header('X-Authorization'))->first();
+        //$key= DB::table('api_keys')->where('key', $request->header('X-Authorization'))->first();
 
-        $input = json_decode($request->getContent(), true);
 
-        $requestType = RequestType::find($input['requestType']);
-        $platform = Platform::find($input['platform']);
+        $requestType = RequestType::find($request->input('requestType'));
+
+        $platform = Platform::find($request->input('platform'));
         $topic = new Topic();
         $topic->platform_id = $platform->id;
         $topic->request_type_id = $requestType->id;
-        $topic->question = $input['question'];
+        $topic->question = $request->input('question');
         $topic->answer = '';
         $topic->save();
-        $this->createUserTopic($key->apikeyable_id , $topic->id);
+        //$this->createUserTopic($key->apikeyable_id , $topic->id);
 
         return $this->response->withItem($topic, new TopicsTransformer());
     }
