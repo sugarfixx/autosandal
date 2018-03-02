@@ -17,7 +17,12 @@ class PlatformsController extends ApiGuardController
 
     public function show($key)
     {
-        $platform = Platform::where('slug', $key)->first();
+        if (is_numeric($key)) {
+            $platform = Platform::where('id', $key)->first();
+        } else {
+            $platform = Platform::where('slug', $key)->first();
+        }
+
         $this->response->getManager()->parseIncludes('topics');
         return $this->response->withItem($platform, new PlatformsTransformer());
     }
