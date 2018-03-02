@@ -20,3 +20,4 @@ Route::middleware('auth:apikey')->get('/user', function (Request $request) {
 
 Route::resource('topics', 'Api\TopicsController');
 Route::resource('platform', 'Api\PlatformsController');
+Route::resource('request_type', 'Api\RequestTypesController');

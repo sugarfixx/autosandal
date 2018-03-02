@@ -15,6 +15,10 @@
                     @endif
 
                     You are logged in!
+                    <div class="list-group">
+                        <a href="#" class="list-group-item">Users</a>
+                        <a href="{{URL::route('topic.index')}}" class="list-group-item">Topics</a>
+                    </div>
                 </div>
             </div>
         </div>
