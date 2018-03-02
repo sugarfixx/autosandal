@@ -16,7 +16,14 @@
 
                         <div class="list-group">
                             @foreach($data as $topic)
-                                <a href="topic/{{$topic->id}}" class="list-group-item">{{$topic->question}}</a>
+                                <a href="topic/{{$topic->id}}" class="list-group-item">
+                                    {{$topic->question}}
+                                    @if($topic->answer)
+                                        <span class="badge badge-secondary">Answered</span>
+                                    @else
+                                        <span class="badge badge-success">New</span>
+                                    @endif
+                                </a>
                             @endforeach
                         </div>
                     </div>

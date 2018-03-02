@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Topic # {{$data->id}}</div>
+                    <div class="panel-heading">Topic # {{$data->id}} | {{$data->requestType->name}}</div>
 
                     <div class="panel-body">
                         @if (session('status'))
@@ -13,10 +13,22 @@
                                 {{ session('status') }}
                             </div>
                         @endif
+                            <form action="/topic" method="post" enctype="multipart/form-data">
+                                {{ csrf_field() }}
+                                {{ method_field('POST') }}
+                                <input type="hidden" name="id" value="{{$data->id}}">
+                                <div class="form-group">
+                                    <label for="question">Question:</label>
+                                    <textarea class="form-control" rows="5" id="question" name="question">{{$data->question}}</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="answer">Answer:</label>
+                                    <textarea class="form-control" rows="5" id="answer" name="answer">{{$data->answer or ''}}</textarea>
+                                </div>
+                                <button type="submit" class="btn btn-default">Update</button>
+                            </form>
 
-                        {{$data->question}}
                         <br>
-                        {{$data->answer}}
                     </div>
                     <div class="panel-footer">
                         <a href="{{URL::route('home')}}" class="btn btn-primary">Dashboard</a>

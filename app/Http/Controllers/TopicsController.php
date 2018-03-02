@@ -16,4 +16,13 @@ class TopicsController extends Controller
     {
         return view('topic', ['data' => Topic::find($id)]);
     }
+
+    public function save(Request $request)
+    {
+        $topic = Topic::find($request->input('id'));
+        $topic->question = $request->question;
+        $topic->answer = $request->answer;
+        $topic->save();
+        return view('topic' ,['data' => $topic]);
+    }
 }
